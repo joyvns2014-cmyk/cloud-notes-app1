@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Cloud Notes</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <h1>Cloud Notes</h1>
+  <form action="/add" method="POST" class="note-form">
+    <input type="text" name="title" placeholder="Title" required>
+    <textarea name="content" placeholder="Write your note..."></textarea>
+    <button type="submit">Add Note</button>
+  </form>
+  <div class="notes">
+    {% for note in notes %}
+      <div class="note">
+        <h3>{{ note.title }}</h3>
+        <p>{{ note.content }}</p>
+        <a href="/edit/{{ note.id }}">Edit</a> |
+        <a href="/delete/{{ note.id }}">Delete</a>
+      </div>
+    {% else %}
+      <p>No notes yet.</p>
+    {% endfor %}
+  </div>
+</body>
+</html>
